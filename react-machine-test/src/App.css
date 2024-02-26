@@ -1,6 +1,8 @@
+
 .form {
     max-width: 400px;
     margin: 0 auto; /* Center the form horizontally */
+    
   }
   
   .form-section {
@@ -10,6 +12,7 @@
   .form-section.row {
     display: flex;
     justify-content: space-between;
+    
   }
   
   .form-section > div {
@@ -47,5 +50,13 @@
   
   button:hover {
     background-color: #0056b3;
+  }
+  
+  .file-inputs {
+    display: flex;
+  }
+  
+  .file-inputs > div {
+    margin-right: 100px; /* Adjust the space between placeholders */
   }
   

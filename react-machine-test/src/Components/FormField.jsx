@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "../App.css";
 
 const FormField = () => {
@@ -9,6 +9,12 @@ const FormField = () => {
     birthDate: "",
     street1: "",
     street2: "",
+    sameAsResidential: false,
+    permanentStreet1: "",
+    permanentStreet2: "",
+    fileName: "",
+    fileType: "",
+    fileUpload: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -49,8 +55,6 @@ const FormField = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  console.log(errors);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -71,88 +75,176 @@ const FormField = () => {
     });
   };
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: checked,
+    });
+  };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
-    <div className="form-section row">
-      <div>
-        <label>First Name:</label>
+      <div className="form-section row names">
+        <div>
+          <label>First Name:</label>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            placeholder="Enter your first name"
+            onChange={handleChange}
+          />
+          {errors.firstName && (
+            <div className="error">{errors.firstName}</div>
+          )}
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            placeholder="Enter your last name"
+            onChange={handleChange}
+          />
+          {errors.lastName && (
+            <div className="error">{errors.lastName}</div>
+          )}
+        </div>
+      </div>
+      <div className="form-section row">
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="Enter your email"
+            onChange={handleChange}
+          />
+          {errors.email && <div className="error">{errors.email}</div>}
+        </div>
+        <div>
+          <label>Date of Birth:</label>
+          <input
+            type="date"
+            name="birthDate"
+            value={formData.birthDate}
+            onChange={handleChange}
+          />
+          {errors.birthDate && (
+            <div className="error">{errors.birthDate}</div>
+          )}
+        </div>
+      </div>
+      <label>Residential Address:</label>
+      <div className="form-section row">
+        <div>
+          <label>Street 1:</label>
+          <input
+            type="text"
+            name="street1"
+            value={formData.street1}
+            placeholder="Enter street 1"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Street 2:</label>
+          <input
+            type="text"
+            name="street2"
+            value={formData.street2}
+            placeholder="Enter street 2"
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+      <div className="form-section row">
         <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          placeholder="Enter your first name"
-          onChange={handleChange}
+          type="checkbox"
+          name="sameAsResidential"
+          onChange={handleCheckboxChange}
+          checked={formData.sameAsResidential}
         />
-        {errors.firstName && (
-          <div className="error">{errors.firstName}</div>
+        <label style={{ margin: "0" }}>Same as Residential</label>
+        {errors.sameAsResidential && (
+          <div className="error">{errors.sameAsResidential}</div>
         )}
       </div>
+      <label>Permanent Address:</label>
+      <div className="form-section row">
+        <div>
+          <label>Street 1:</label>
+          <input
+            type="text"
+            name="permanentStreet1"
+            value={
+              formData.sameAsResidential
+                ? formData.street1
+                : formData.permanentStreet1
+            }
+            placeholder="Enter street 1"
+            onChange={handleChange}
+            disabled={formData.sameAsResidential}
+          />
+        </div>
+        <div>
+          <label>Street 2:</label>
+          <input
+            type="text"
+            name="permanentStreet2"
+            value={
+              formData.sameAsResidential
+                ? formData.street2
+                : formData.permanentStreet2
+            }
+            placeholder="Enter street 2"
+            onChange={handleChange}
+            disabled={formData.sameAsResidential}
+          />
+        </div>
+      </div>
+      <div className="form-section row">
+  <div className="upload-section">
+    <label>Upload Documents:</label>
+    <div className="file-inputs">
       <div>
-        <label>Last Name:</label>
+        <label>File Name:</label>
         <input
           type="text"
-          name="lastName"
-          value={formData.lastName}
-          placeholder="Enter your last name"
+          name="fileName"
+          value={formData.fileName}
+          placeholder="Enter file name"
           onChange={handleChange}
         />
-        {errors.lastName && (
-          <div className="error">{errors.lastName}</div>
-        )}
-      </div>
-    </div>
-    <div className="form-section row">
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          placeholder="Enter your email"
-          onChange={handleChange}
-        />
-        {errors.email && <div className="error">{errors.email}</div>}
       </div>
       <div>
-        <label>Date of Birth:</label>
-        <input
-          type="date"
-          name="birthDate"
-          value={formData.birthDate}
-          onChange={handleChange}
-        />
-        {errors.birthDate && <div className="error">{errors.birthDate}</div>}
-      </div>
-    </div>
-    <div className="form-section row">
-      <div>
-        <label>Street 1:</label>
+        <label>Type of File:</label>
         <input
           type="text"
-          name="street1"
-          value={formData.street1}
-          placeholder="Enter street 1"
+          name="fileType"
+          value={formData.fileType}
+          placeholder="Enter type of file"
           onChange={handleChange}
         />
       </div>
       <div>
-        <label>Street 2:</label>
+        <label>Upload Document:</label>
         <input
-          type="text"
-          name="street2"
-          value={formData.street2}
-          placeholder="Enter street 2"
+          type="file"
+          name="fileUpload"
           onChange={handleChange}
         />
       </div>
     </div>
-    <button type="submit">Submit</button>
-  </form>
-  
+  </div>
+</div>
 
-
-  
-
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
