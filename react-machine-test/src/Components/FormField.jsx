@@ -231,71 +231,49 @@ const FormField = () => {
         <div className="upload-section">
           <label>Upload Documents:</label>
           <div className="file-inputs">
-            <div>
-              <label>File Name:</label>
-              <input
-                type="text"
-                name="fileName"
-                value={formData.fileName}
-                placeholder="Enter file name"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Type of File:</label>
-              <input
-                type="text"
-                name="fileType"
-                value={formData.fileType}
-                placeholder="Enter type of file"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label className="upload-btn">
-                <input type="file" name="fileUpload" onChange={handleChange} />
-              </label>
-            </div>
+            {/* Initial set of additional file inputs */}
+            {formData.additionalFiles.map((file, index) => (
+              <div key={index} className="form-section row">
+                <div>
+                  <label>File Name:</label>
+                  <input
+                    type="text"
+                    name={`fileName${index}`}
+                    value={file.name || ""}
+                    placeholder="Enter file name"
+                    onChange={(e) => handleAdditionalFileChange(e, index)}
+                  />
+                </div>
+                <div>
+                  <label>Type of File:</label>
+                  <input
+                    type="text"
+                    name={`fileType${index}`}
+                    value={file.type || ""}
+                    placeholder="Enter type of file"
+                    onChange={(e) => handleAdditionalFileChange(e, index)}
+                  />
+                </div>
+                <div>
+                  <label className="upload-btn">
+                    <input type="file" name={`fileUpload${index}`} onChange={(e) => handleAdditionalFileChange(e, index)} />
+                  </label>
+                </div>
+                {/* Show delete button only for dynamically added additional file inputs */}
+                {index > 0 && (
+                  <div>
+                    <button type="button" onClick={() => handleDeleteFile(index)}>Delete</button>
+                  </div>
+                )}
+              </div>
+            ))}
+            {/* Button to add more file inputs */}
             <div>
               <button type="button" onClick={handleAddMoreFiles}>+</button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Additional File Inputs */}
-      {formData.additionalFiles.map((file, index) => (
-        <div key={index} className="form-section row">
-          <div>
-            <label>File Name:</label>
-            <input
-              type="text"
-              name={`fileName${index}`}
-              value={file.name || ""}
-              placeholder="Enter file name"
-              onChange={(e) => handleAdditionalFileChange(e, index)}
-            />
-          </div>
-          <div>
-            <label>Type of File:</label>
-            <input
-              type="text"
-              name={`fileType${index}`}
-              value={file.type || ""}
-              placeholder="Enter type of file"
-              onChange={(e) => handleAdditionalFileChange(e, index)}
-            />
-          </div>
-          <div>
-            <label className="upload-btn">
-              <input type="file" name={`fileUpload${index}`} onChange={(e) => handleAdditionalFileChange(e, index)} />
-            </label>
-          </div>
-          <div>
-            <button type="button" onClick={() => handleDeleteFile(index)}>Delete</button>
-          </div>
-        </div>
-      ))}
 
       <button type="submit">Submit</button>
     </form>
