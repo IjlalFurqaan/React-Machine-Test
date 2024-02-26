@@ -12,9 +12,7 @@ const FormField = () => {
     sameAsResidential: false,
     permanentStreet1: "",
     permanentStreet2: "",
-    fileName: "",
-    fileType: "",
-    fileUpload: "",
+    additionalFiles: [{ name: "", type: "" }],
   });
 
   const [errors, setErrors] = useState({});
@@ -55,9 +53,37 @@ const FormField = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleAdditionalFileChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedAdditionalFiles = [...formData.additionalFiles];
+    updatedAdditionalFiles[index] = {
+      ...updatedAdditionalFiles[index],
+      [name]: value,
+    };
+    setFormData({
+      ...formData,
+      additionalFiles: updatedAdditionalFiles,
+    });
+  };
+
+  const handleAddMoreFiles = () => {
+    setFormData({
+      ...formData,
+      additionalFiles: [...formData.additionalFiles, { name: "", type: "" }],
+    });
+  };
+
+  const handleDeleteFile = (index) => {
+    const updatedAdditionalFiles = [...formData.additionalFiles];
+    updatedAdditionalFiles.splice(index, 1);
+    setFormData({
+      ...formData,
+      additionalFiles: updatedAdditionalFiles,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const isValid = validateForm();
     if (isValid) {
       console.log("Form Submitted", formData);
@@ -96,9 +122,7 @@ const FormField = () => {
             placeholder="Enter your first name"
             onChange={handleChange}
           />
-          {errors.firstName && (
-            <div className="error">{errors.firstName}</div>
-          )}
+          {errors.firstName && <div className="error">{errors.firstName}</div>}
         </div>
         <div>
           <label>Last Name:</label>
@@ -109,9 +133,7 @@ const FormField = () => {
             placeholder="Enter your last name"
             onChange={handleChange}
           />
-          {errors.lastName && (
-            <div className="error">{errors.lastName}</div>
-          )}
+          {errors.lastName && <div className="error">{errors.lastName}</div>}
         </div>
       </div>
       <div className="form-section row">
@@ -134,9 +156,7 @@ const FormField = () => {
             value={formData.birthDate}
             onChange={handleChange}
           />
-          {errors.birthDate && (
-            <div className="error">{errors.birthDate}</div>
-          )}
+          {errors.birthDate && <div className="error">{errors.birthDate}</div>}
         </div>
       </div>
       <label>Residential Address:</label>
@@ -208,40 +228,74 @@ const FormField = () => {
         </div>
       </div>
       <div className="form-section row">
-  <div className="upload-section">
-    <label>Upload Documents:</label>
-    <div className="file-inputs">
-      <div>
-        <label>File Name:</label>
-        <input
-          type="text"
-          name="fileName"
-          value={formData.fileName}
-          placeholder="Enter file name"
-          onChange={handleChange}
-        />
+        <div className="upload-section">
+          <label>Upload Documents:</label>
+          <div className="file-inputs">
+            <div>
+              <label>File Name:</label>
+              <input
+                type="text"
+                name="fileName"
+                value={formData.fileName}
+                placeholder="Enter file name"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label>Type of File:</label>
+              <input
+                type="text"
+                name="fileType"
+                value={formData.fileType}
+                placeholder="Enter type of file"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label className="upload-btn">
+                <input type="file" name="fileUpload" onChange={handleChange} />
+              </label>
+            </div>
+            <div>
+              <button type="button" onClick={handleAddMoreFiles}>+</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Type of File:</label>
-        <input
-          type="text"
-          name="fileType"
-          value={formData.fileType}
-          placeholder="Enter type of file"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Upload Document:</label>
-        <input
-          type="file"
-          name="fileUpload"
-          onChange={handleChange}
-        />
-      </div>
-    </div>
-  </div>
-</div>
+
+      {/* Additional File Inputs */}
+      {formData.additionalFiles.map((file, index) => (
+        <div key={index} className="form-section row">
+          <div>
+            <label>File Name:</label>
+            <input
+              type="text"
+              name={`fileName${index}`}
+              value={file.name || ""}
+              placeholder="Enter file name"
+              onChange={(e) => handleAdditionalFileChange(e, index)}
+            />
+          </div>
+          <div>
+            <label>Type of File:</label>
+            <input
+              type="text"
+              name={`fileType${index}`}
+              value={file.type || ""}
+              placeholder="Enter type of file"
+              onChange={(e) => handleAdditionalFileChange(e, index)}
+            />
+          </div>
+          <div>
+            <label className="upload-btn">
+              <input type="file" name={`fileUpload${index}`} onChange={(e) => handleAdditionalFileChange(e, index)} />
+            </label>
+          </div>
+          <div>
+            <button type="button" onClick={() => handleDeleteFile(index)}>Delete</button>
+          </div>
+        </div>
+      ))}
 
       <button type="submit">Submit</button>
     </form>

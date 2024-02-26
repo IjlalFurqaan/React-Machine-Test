@@ -59,4 +59,45 @@
   .file-inputs > div {
     margin-right: 100px; /* Adjust the space between placeholders */
   }
+  form-section input[type="text"] {
+    width: ;
+    padding: 8px 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.upload-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .upload-btn input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
+  .upload-btn::before {
+    content: "Upload"; /* Text for the button */
+  }
+  
+  .upload-btn::after {
+    content: '\2191'; /* Unicode for up arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
   
