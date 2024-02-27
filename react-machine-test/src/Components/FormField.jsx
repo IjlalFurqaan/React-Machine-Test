@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "../App.css";
 
 const FormField = () => {
@@ -221,6 +221,8 @@ const FormField = () => {
                 formData.sameAsResidential
                   ? formData.street1
                   : formData.permanentStreet1
+
+
               }
               placeholder="Enter street 1"
               onChange={handleChange}
@@ -272,13 +274,22 @@ const FormField = () => {
                   </div>
                   <div>
                     <label className="upload-btn">
-                      <input type="file" name={`fileUpload${index}`} onChange={(e) => handleAdditionalFileChange(e, index)} />
+                      <input
+                        type="file"
+                        name={`fileUpload${index}`}
+                        onChange={(e) => handleAdditionalFileChange(e, index)}
+                      />
+                      <span className="upload-placeholder">
+                        <i className="fas fa-cloud-upload-alt"></i> Upload File
+                      </span>
                     </label>
                   </div>
                   {/* Show delete button only for dynamically added additional file inputs */}
                   {index > 0 && (
-                    <div>
-                      <button type="button" onClick={() => handleDeleteFile(index)}>Delete</button>
+                    <div className="delete-btn">
+                      <button type="button" onClick={() => handleDeleteFile(index)}>
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -293,7 +304,6 @@ const FormField = () => {
 
         <button type="submit">Submit</button>
       </form>
-
       {/* Display submitted records in a table */}
       {submitted && (
         <table className="submitted-data">
