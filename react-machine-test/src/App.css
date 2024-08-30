@@ -1,115 +1,187 @@
-/* App.css */
-
-/* Form styles */
-.form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff; /* White background */
+  margin: 0;
+  padding: 0;
 }
 
+/* Form Header */
+h1 {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  color: #000;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: #000;
+  margin: 10px auto 0 auto;
+}
+
+/* Form Container */
+.form {
+  background-color: #fff;
+  padding: 40px;
+  margin: 40px auto;
+  border-radius: 8px;
+  max-width: 700px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Sections */
 .form-section {
   margin-bottom: 20px;
 }
 
 .form-section.row {
   display: flex;
-  align-items: center;
-}
-
-.form-section.row div {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.error {
-  color: #dc3545;
-  font-size: 0.8em;
-}
-
-/* File upload styles */
-.file-inputs {
-  display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.file-inputs .form-section.row {
-  flex-basis: calc(50% - 5px);
+.form-section > div {
+  flex-basis: calc(50% - 10px);
 }
 
-.upload-section label {
+/* Labels */
+.form-section label {
   display: block;
+  font-weight: bold;
   margin-bottom: 5px;
+  color: #333;
+  font-size: 14px;
 }
 
-.upload-placeholder {
-  position: relative;
-  display: block;
-  padding: 10px;
-  border: 2px dashed #007bff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.upload-placeholder i {
-  margin-right: 5px;
-}
-
-.delete-btn button {
-  padding: 5px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.delete-btn button i {
-  color: #dc3545;
-}
-
-/* Submitted data table */
-.submitted-data {
+/* Input Fields */
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="date"] {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
 }
 
-.submitted-data th,
-.submitted-data td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+.form-section input::placeholder {
+  color: #aaa;
 }
 
-.submitted-data th {
-  background-color: #f2f2f2;
+/* Checkbox */
+.form-section input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
 }
 
-/* Button styles */
+/* Error Messages */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  background-color: #333; /* Dark button color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #555;
+}
+
 button[type="submit"] {
+  display: block;
+  width: 200px;
+  margin: 30px auto 0 auto; /* Center the submit button */
+  background-color: #333; /* Dark grey */
+  color: #fff;
+  height: 50px; /* Fixed height for the button */
+  font-size: 16px;
+}
+
+/* File Upload Section */
+.file-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.file-inputs > div {
+  flex-basis: calc(33% - 10px);
+  margin-bottom: 20px;
+}
+
+.file-inputs input[type="text"],
+.file-inputs input[type="file"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.file-inputs button {
+  height: 36px;
+  width: 36px;
   background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
   border-radius: 4px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-button[type="button"] {
-  background-color: #28a745;
   color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
-button[type="button"]:hover {
-  background-color: #218838;
+.file-inputs button i {
+  font-size: 16px;
+  margin-right: 0;
+}
+
+/* File Upload Button Specific Styles */
+.file-inputs button.upload-btn {
+  background-color: #28a745; /* Green for upload */
+}
+
+.file-inputs button.add-btn {
+  background-color: #007bff; /* Blue for add */
+}
+
+.file-inputs button.delete-btn {
+  background-color: #dc3545; /* Red for delete */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .form-section > div {
+      flex-basis: 100%;
+  }
+
+  button {
+      width: 100%; /* Full width button on small screens */
+  }
+
+  .file-inputs > div {
+      flex-basis: 100%;
+  }
 }
