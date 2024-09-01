@@ -1,43 +1,38 @@
-/* General Styles */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #ffffff; /* White background */
+/* Reset and base styles */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Form Header */
-h1 {
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  color: #000;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 24px;
-  position: relative;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
 }
 
-h1::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 2px;
-  background-color: #000;
-  margin: 10px auto 0 auto;
-}
-
-/* Form Container */
-.form {
+/* Form container */
+.form-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
   background-color: #fff;
-  padding: 40px;
-  margin: 40px auto;
-  border-radius: 8px;
-  max-width: 700px;
-  border: 1px solid #ddd;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Form Sections */
+/* Form header */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Form sections */
 .form-section {
   margin-bottom: 20px;
 }
@@ -53,135 +48,139 @@ h1::after {
 }
 
 /* Labels */
-.form-section label {
+label {
   display: block;
-  font-weight: bold;
   margin-bottom: 5px;
-  color: #333;
+  font-weight: bold;
   font-size: 14px;
+  color: #555;
 }
 
-/* Input Fields */
-.form-section input[type="text"],
-.form-section input[type="email"],
-.form-section input[type="date"] {
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="file"] {
   width: 100%;
   padding: 10px;
-  border-radius: 4px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  border-radius: 5px;
   font-size: 14px;
-  font-family: 'Arial', sans-serif;
+  transition: border-color 0.3s;
 }
 
-.form-section input::placeholder {
-  color: #aaa;
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 /* Checkbox */
-.form-section input[type="checkbox"] {
-  margin-right: 10px;
+input[type="checkbox"] {
+  margin-right: 5px;
   transform: scale(1.2);
 }
 
-/* Error Messages */
-.error {
-  color: red;
-  font-size: 12px;
+/* File upload section */
+.document-upload {
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.document-upload input[type="file"] {
   margin-top: 5px;
 }
 
 /* Buttons */
 button {
-  padding: 12px 25px;
-  background-color: #333; /* Dark button color */
+  padding: 10px 15px;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #555;
+  background-color: #0056b3;
 }
 
 button[type="submit"] {
   display: block;
-  width: 200px;
-  margin: 30px auto 0 auto; /* Center the submit button */
-  background-color: #333; /* Dark grey */
-  color: #fff;
-  height: 50px; /* Fixed height for the button */
-  font-size: 16px;
-}
-
-/* File Upload Section */
-.file-inputs {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.file-inputs > div {
-  flex-basis: calc(33% - 10px);
-  margin-bottom: 20px;
-}
-
-.file-inputs input[type="text"],
-.file-inputs input[type="file"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   width: 100%;
-  margin-bottom: 10px;
-}
-
-.file-inputs button {
-  height: 36px;
-  width: 36px;
-  background-color: #007bff;
-  border-radius: 4px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin-left: 10px;
-}
-
-.file-inputs button i {
+  padding: 12px;
+  background-color: #28a745;
   font-size: 16px;
-  margin-right: 0;
+  font-weight: bold;
+  margin-top: 20px;
+  text-transform: uppercase;
 }
 
-/* File Upload Button Specific Styles */
-.file-inputs button.upload-btn {
-  background-color: #28a745; /* Green for upload */
+button[type="submit"]:hover {
+  background-color: #218838;
 }
 
-.file-inputs button.add-btn {
-  background-color: #007bff; /* Blue for add */
+/* Error messages */
+.error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
-.file-inputs button.delete-btn {
-  background-color: #dc3545; /* Red for delete */
+/* Mandatory field indicator */
+.mandatory {
+  color: #dc3545;
+  margin-left: 2px;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .form-section > div {
-      flex-basis: 100%;
+/* Table styles */
+.form-records {
+  margin-top: 40px;
+}
+
+.form-records h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .form-section > div,
+  .document-upload > div {
+    flex-basis: 100%;
+    margin-bottom: 15px;
   }
 
-  button {
-      width: 100%; /* Full width button on small screens */
-  }
-
-  .file-inputs > div {
-      flex-basis: 100%;
+  .form-container {
+    padding: 20px;
   }
 }
